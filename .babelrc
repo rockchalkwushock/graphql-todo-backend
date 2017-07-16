@@ -1,0 +1,33 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ],
+        "stage-2"
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ],
+        "stage-2"
+      ]
+    },
+    "test": {
+      "presets": ["env", "stage-2"]
+    }
+  }
+}

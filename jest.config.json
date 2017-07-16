@@ -1,0 +1,14 @@
+{
+  "bail": true,
+  "testEnvironment": "node",
+  "collectCoverageFrom": ["TODO: Update for sources to be covered."],
+  "coveragePathIgnorePatterns": ["TODO: Update for sources to ignore."],
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  }
+}

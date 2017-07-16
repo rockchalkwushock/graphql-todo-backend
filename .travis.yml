@@ -1,0 +1,22 @@
+language: node_js
+node_js: node
+services:
+  # TODO: Update with services.
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+    # TODO: Update with branches for testing.
+    - master
+    - development
+script:
+  # TODO: Update with scripts to run.
+  # lint, test, generate coverage
+  - yarn start validate.withCoverage
+  # build client code for distribution
+  # - yarn start client
+after_success:
+  # TODO: Update with scripts for after build finished.
+  # send coverage data to CodeCov
+  - yarn start reportCoverage
