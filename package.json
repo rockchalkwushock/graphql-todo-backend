@@ -20,7 +20,10 @@
     }
   },
   "lint-staged": {
-    "*.js": ["yarn prettier", "git add"]
+    "*.js": [
+      "yarn prettier",
+      "git add"
+    ]
   },
   "dependencies": {
     "babel-polyfill": "~6.23.0",
@@ -30,7 +33,10 @@
     "express": "~4.15.3",
     "graphql": "~0.10.4",
     "graphql-server-express": "~1.0.0",
-    "graphql-tools": "~1.1.0"
+    "graphql-tools": "~1.1.0",
+    "pg": "~6.4.1",
+    "pg-hstore": "~2.3.2",
+    "sequelize": "~4.3.2"
   },
   "devDependencies": {
     "babel-preset-env": "~1.6.0",
