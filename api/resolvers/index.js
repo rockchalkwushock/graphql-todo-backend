@@ -1,3 +1,5 @@
+import { loginValidation } from '../services'
+
 export default {
   User: {
     todos: ({ id }, args, { models }) =>
@@ -16,19 +18,21 @@ export default {
         where: {
           userId
         }
-      })
+      }),
+    me: (parent, args, { models, user }) => {
+      if (user) {
+        return models.User.findOne({
+          where: {
+            id: user
+          }
+        })
+      }
+      // TODO: Handle error of user not being logged in.
+      // redirect & error message.
+      return null
+    }
   },
   Mutation: {
-    /**
-     * REVIEW
-     *
-     * At the moment if I perform a CRUD operation on a Todo that
-     * does not belong to the user the return value is 0.
-     *
-     * QUESTION
-     *
-     * How to handle error case & presentation?
-     */
     completeTodo: (parent, { id, completed, userId }, { models }) =>
       models.Todo.update({ completed }, { where: { id, userId } }),
     createTodo: (parent, args, { models }) => models.Todo.create(args),
@@ -36,10 +40,12 @@ export default {
       models.Todo.update({ text: newText }, { where: { id, userId } }),
     deleteTodo: (parent, { id, userId }, { models }) =>
       models.Todo.destroy({ where: { id, userId } }),
-    createUser: (parent, args, { models }) => models.User.create(args),
     updateUser: (parent, { id, newUsername }, { models }) =>
       models.User.update({ username: newUsername }, { where: { id } }),
     deleteUser: (parent, { id }, { models }) =>
-      models.User.destroy({ where: { id } })
+      models.User.destroy({ where: { id } }),
+    register: (parent, args, { models }) => models.User.create(args),
+    login: (parent, { email, password }, { models, env }) =>
+      loginValidation(email, password, models, env)
   }
 }

@@ -3,25 +3,9 @@ import Sequelize from 'sequelize'
 let sequelize
 
 if (process.env.NODE_ENV === 'test') {
-  sequelize = new Sequelize(
-    'graphql_todo_test',
-    'rockchalkwushock',
-    process.env.PSQL_PASSWORD,
-    {
-      host: 'localhost',
-      dialect: 'postgres'
-    }
-  )
+  sequelize = new Sequelize(process.env.PSQL_URI)
 } else if (process.env.NODE_ENV === 'development') {
-  sequelize = new Sequelize(
-    'graphql_todo_dev',
-    'rockchalkwushock',
-    process.env.PSQL_PASSWORD,
-    {
-      host: 'localhost',
-      dialect: 'postgres'
-    }
-  )
+  sequelize = new Sequelize(process.env.PSQL_URI)
 } else if (process.env.NODE_ENV === 'production') {
   sequelize = new Sequelize(process.env.PSQL_URI)
 }
@@ -38,5 +22,6 @@ Object.keys(db).forEach(modelName => {
 })
 
 db.sequelize = sequelize
+db.Sequelize = Sequelize
 
 export default db
