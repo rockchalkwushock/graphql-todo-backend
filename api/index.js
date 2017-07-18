@@ -8,6 +8,10 @@ import schema from './schema'
 import models from './models'
 
 const PORT = 3000
+// Use to set up force dropping tables in 'test'
+const isProd = process.env.NODE_ENV !== 'production'
+console.log(isProd)
+console.log(!isProd)
 const app = express()
 
 app.use(
@@ -16,14 +20,20 @@ app.use(
     endpointURL: '/graphql'
   })
 )
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
+app.use(
+  '/graphql',
+  bodyParser.json(),
+  graphqlExpress({ schema, context: { models } })
+)
 
 models.sequelize
-  .sync()
+  .sync({ force: isProd })
   .then(() => {
     app.listen(PORT, err => {
       if (err) return console.log(err)
-      console.log(`GraphQL Server running on port ${PORT}`)
+      console.log(
+        `GraphQL Server running on port ${PORT} in ${process.env.NODE_ENV}`
+      )
     })
   })
   .catch(e => {
