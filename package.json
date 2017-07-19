@@ -11,7 +11,7 @@
     "dev": "nps start.dev",
     "precommit": "lint-staged",
     "prettier": "prettier --single-quote --no-semi",
-    "start": "nps start",
+    "start": "nps",
     "test": "nps test"
   },
   "config": {
@@ -20,10 +20,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "yarn prettier",
-      "git add"
-    ]
+    "*.js": ["yarn prettier", "git add"]
   },
   "dependencies": {
     "babel-polyfill": "~6.23.0",

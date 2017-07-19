@@ -3,7 +3,7 @@ import Sequelize from 'sequelize'
 import { env } from '../config'
 
 let sequelize
-
+/* istanbul ignore else */
 if (process.env.NODE_ENV === 'test') {
   sequelize = new Sequelize(env.PSQL_URI)
 } else if (process.env.NODE_ENV === 'development') {
@@ -21,6 +21,7 @@ const db = {
 }
 
 Object.keys(db).forEach(modelName => {
+  /* istanbul ignore else */
   if ('associate' in db[modelName]) {
     db[modelName].associate(db)
   }

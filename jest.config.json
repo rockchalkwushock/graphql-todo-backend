@@ -1,8 +1,12 @@
 {
   "bail": true,
   "testEnvironment": "node",
-  "collectCoverageFrom": ["TODO: Update for sources to be covered."],
-  "coveragePathIgnorePatterns": ["TODO: Update for sources to ignore."],
+  "collectCoverageFrom": [
+    "api/models/*.js",
+    "api/resolvers/*.js",
+    "api/schema/*.js",
+    "api/services/**/*.js"
+  ],
   "coverageThreshold": {
     "global": {
       "branches": 100,

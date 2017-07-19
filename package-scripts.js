@@ -15,10 +15,6 @@ module.exports = {
       fix: series.nps('lint --fix')
     },
     reportCoverage: 'codecov',
-    start: {
-      default: series.nps('api'),
-      dev: concurrent.nps('api.dev')
-    },
     test: {
       default: 'jest --config jest.config.json --runInBand',
       coverage: series.nps('test --coverage --silent'),
