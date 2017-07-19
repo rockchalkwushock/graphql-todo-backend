@@ -35,21 +35,26 @@ export default new VKontakteStrategy(
     callbackURL: env.VK_CALLBACK
   },
   async (accessToken, refreshToken, params, profile, done) => {
-    const { id, displayName } = profile
-    const vkUsers = await models.VKAuth.findAll({
-      limit: 1,
-      where: { id }
-    })
-    if (!vkUsers.length) {
-      const user = await models.User.create({
-        username: displayName
+    try {
+      const { id, displayName } = profile
+      const vkUsers = await models.VKAuth.findAll({
+        limit: 1,
+        where: { id }
       })
-      await models.VKAuth.create({
-        id,
-        display_name: displayName,
-        user_id: user.id
-      })
+      if (!vkUsers.length) {
+        const user = await models.User.create({
+          username: displayName
+        })
+        await models.VKAuth.create({
+          id,
+          display_name: displayName,
+          user_id: user.id
+        })
+      }
+      done(null, {})
+    } catch (e) {
+      console.log(e)
+      throw new Error('Oops, VK is screwed up!')
     }
-    done(null, {})
   }
 )

@@ -12,7 +12,7 @@ import FacebookStrategy from 'passport-facebook'
  *
  * does not work here?
  *
- * Returns as undefined.
+ * Returns as undefined, yet works fine in ./VK_Strategy.js???
  */
 import env from '../../config/environment'
 import models from '../../models'
@@ -29,31 +29,36 @@ export default new FacebookStrategy(
      * 1. First time login
      * 2. All times after first time.
      */
-    const { id, displayName, username } = profile
-    // Search for user in database via facebook id.
-    const fbUsers = await models.FBAuth.findAll({
-      limit: 1,
-      where: { id }
-    })
-    // if the array is empty, no user exists at that facebook id.
-    if (!fbUsers.length) {
-      let user
-      // Use the facebook username if available
-      // if not use displayName
-      if (username !== undefined) {
-        user = await models.User.create({ username })
-      } else {
-        user = await models.User.create({ username: displayName })
-      }
-      // Just as in LocalAuth, FBAuth depends on the association
-      // with User, so User must be created first.
-      await models.FBAuth.create({
-        id,
-        display_name: displayName,
-        user_id: user.id
+    try {
+      const { id, displayName, username } = profile
+      // Search for user in database via facebook id.
+      const fbUsers = await models.FBAuth.findAll({
+        limit: 1,
+        where: { id }
       })
+      // if the array is empty, no user exists at that facebook id.
+      if (!fbUsers.length) {
+        let user
+        // Use the facebook username if available
+        // if not use displayName
+        if (username !== undefined) {
+          user = await models.User.create({ username })
+        } else {
+          user = await models.User.create({ username: displayName })
+        }
+        // Just as in LocalAuth, FBAuth depends on the association
+        // with User, so User must be created first.
+        await models.FBAuth.create({
+          id,
+          display_name: displayName,
+          user_id: user.id
+        })
+      }
+      // Return null & empty object for sessions (not using)
+      done(null, {})
+    } catch (e) {
+      console.log(e)
+      throw new Error('Oops, Facebook is screwed up!')
     }
-    // Return null & empty object for sessions (not using)
-    done(null, {})
   }
 )
