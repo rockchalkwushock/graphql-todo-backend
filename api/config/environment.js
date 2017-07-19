@@ -24,7 +24,10 @@ const defaultConfig = {
   FB_APP: process.env.FB_APP_ID,
   FB_CALLBACK: process.env.FB_CALLBACK_URL,
   FB_SECRET: process.env.FB_APP_SECRET,
-  PORT: process.env.PORT || 3000
+  PORT: process.env.PORT || 3000,
+  VK_APP: process.env.VK_APP_ID,
+  VK_CALLBACK: process.env.VK_CALLBACK_URL,
+  VK_SECRET: process.env.VK_APP_SECRET
 }
 
 function envConfig(env) {

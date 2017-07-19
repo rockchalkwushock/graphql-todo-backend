@@ -3,7 +3,7 @@ import express from 'express'
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express'
 
 import { env, middlewares } from './config'
-import { authFacebook } from './services'
+import { authFacebook, authVkontakte } from './services'
 import schema from './schema'
 import models from './models'
 
@@ -17,6 +17,11 @@ middlewares(app)
 // Third-Party Authentication
 app.get('/auth/facebook', authFacebook)
 app.get('/auth/facebook/callback', authFacebook, (req, res) => {
+  // TODO: Cleanup
+  res.send('auth good')
+})
+app.get('/auth/vkontakte', authVkontakte)
+app.get('/auth/vkontakte/callback', authVkontakte, (req, res) => {
   // TODO: Cleanup
   res.send('auth good')
 })

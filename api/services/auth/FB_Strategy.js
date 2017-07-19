@@ -23,7 +23,7 @@ export default new FacebookStrategy(
     clientSecret: env.FB_SECRET,
     callbackURL: env.FB_CALLBACK
   },
-  async (accessToken, refreshToken, profile, cb) => {
+  async (accessToken, refreshToken, profile, done) => {
     /**
      * Cases
      * 1. First time login
@@ -54,6 +54,6 @@ export default new FacebookStrategy(
       })
     }
     // Return null & empty object for sessions (not using)
-    cb(null, {})
+    done(null, {})
   }
 )

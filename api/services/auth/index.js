@@ -6,10 +6,15 @@ import { sign, verify } from 'jsonwebtoken'
 
 import { env } from '../../config'
 import facebookLogin from './FB_Strategy'
+import vkontakteLogin from './VK_Strategy'
 
 passport.use(facebookLogin)
+passport.use(vkontakteLogin)
 
 export const authFacebook = passport.authenticate('facebook', {
+  session: false
+})
+export const authVkontakte = passport.authenticate('vkontakte', {
   session: false
 })
 

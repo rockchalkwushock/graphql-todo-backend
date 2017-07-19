@@ -16,7 +16,8 @@ const db = {
   FBAuth: sequelize.import('./FB_Auth'),
   LocalAuth: sequelize.import('./LocalAuth'),
   Todo: sequelize.import('./Todo'),
-  User: sequelize.import('./User')
+  User: sequelize.import('./User'),
+  VKAuth: sequelize.import('./VK_Auth')
 }
 
 Object.keys(db).forEach(modelName => {
