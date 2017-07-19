@@ -1,16 +1,20 @@
 import Sequelize from 'sequelize'
 
+import { env } from '../config'
+
 let sequelize
 
 if (process.env.NODE_ENV === 'test') {
-  sequelize = new Sequelize(process.env.PSQL_URI)
+  sequelize = new Sequelize(env.PSQL_URI)
 } else if (process.env.NODE_ENV === 'development') {
-  sequelize = new Sequelize(process.env.PSQL_URI)
+  sequelize = new Sequelize(env.PSQL_URI)
 } else if (process.env.NODE_ENV === 'production') {
-  sequelize = new Sequelize(process.env.PSQL_URI)
+  sequelize = new Sequelize(env.PSQL_URI)
 }
 
 const db = {
+  FBAuth: sequelize.import('./FB_Auth'),
+  LocalAuth: sequelize.import('./LocalAuth'),
   Todo: sequelize.import('./Todo'),
   User: sequelize.import('./User')
 }

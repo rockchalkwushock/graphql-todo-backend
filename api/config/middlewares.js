@@ -6,10 +6,10 @@ import expressWinston from 'express-winston'
 import helmet from 'helmet'
 import methodOverride from 'method-override'
 import morgan from 'morgan'
-// import passport from 'passport'
+import passport from 'passport'
 
 import winstonInstance from './winston'
-import { addUser } from '../services'
+// import { addUser } from '../services'
 
 const isTest = process.env.NODE_ENV === 'test'
 const isDev = process.env.NODE_ENV === 'development'
@@ -18,7 +18,7 @@ export default app => {
   app.use(compression())
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
-  // app.use(passport.initialize())
+  app.use(passport.initialize())
   app.use(helmet())
   app.use(cors())
   app.use(expressStatusMonitor())
@@ -43,5 +43,5 @@ export default app => {
    * - Rename
    * - Placement?
    */
-  app.use(addUser)
+  // app.use(addUser)
 }

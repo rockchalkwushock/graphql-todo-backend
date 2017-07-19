@@ -44,6 +44,8 @@
     "method-override": "~2.3.9",
     "morgan": "~1.8.2",
     "passport": "~0.3.2",
+    "passport-facebook": "~2.1.1",
+    "passport-vkontakte": "~0.3.2",
     "pg": "~6.4.1",
     "pg-hstore": "~2.3.2",
     "sequelize": "~4.3.2",

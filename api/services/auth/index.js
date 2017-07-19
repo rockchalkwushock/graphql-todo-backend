@@ -1,10 +1,17 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
-
+import passport from 'passport'
 import { compareSync } from 'bcrypt-nodejs'
 import { sign, verify } from 'jsonwebtoken'
 
 import { env } from '../../config'
+import facebookLogin from './FB_Strategy'
+
+passport.use(facebookLogin)
+
+export const authFacebook = passport.authenticate('facebook', {
+  session: false
+})
 
 /**
  * @func loginValidation

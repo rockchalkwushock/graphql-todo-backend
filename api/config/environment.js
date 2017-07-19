@@ -21,6 +21,9 @@ const prodConfig = {
 }
 
 const defaultConfig = {
+  FB_APP: process.env.FB_APP_ID,
+  FB_CALLBACK: process.env.FB_CALLBACK_URL,
+  FB_SECRET: process.env.FB_APP_SECRET,
   PORT: process.env.PORT || 3000
 }
 

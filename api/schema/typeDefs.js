@@ -5,7 +5,7 @@ export default `
     id: ID!
     text: String!
     updatedAt: String!
-    userId: ID!
+    user_id: ID!
   }
   type User {
     id: ID!
@@ -18,14 +18,14 @@ export default `
   type Query {
     findAllUsers: [User!]!
     findUserById(id: ID!): User
-    findUserTodos(userId: ID!): [Todo!]!
+    findUserTodos(user_id: ID!): [Todo!]!
     me: User
   }
   type Mutation {
-    completeTodo(id: ID!, completed: Boolean, userId: ID!): Int!
-    createTodo(text: String!, userId: ID!): Todo!
-    updateTodo(id: ID! newText: String!, userId: ID!): Int!
-    deleteTodo(id: ID!, userId: ID!): Int!
+    completeTodo(id: ID!, completed: Boolean, user_id: ID!): Int!
+    createTodo(text: String!, user_id: ID!): Todo!
+    updateTodo(id: ID! newText: String!, user_id: ID!): Int!
+    deleteTodo(id: ID!, user_id: ID!): Int!
     updateUser(id: ID!, newUsername: String!): Int!
     deleteUser(id: ID!): Int!
     register(username: String!, email: String!, password: String!): User!

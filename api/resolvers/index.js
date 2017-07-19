@@ -8,15 +8,15 @@ export default {
       })
   },
   Todo: {
-    userId: ({ id }, args, { models }) => models.User.findById(id)
+    user_id: ({ id }, args, { models }) => models.User.findById(id)
   },
   Query: {
     findAllUsers: (parent, args, { models }) => models.User.findAll(),
     findUserById: (parent, { id }, { models }) => models.User.findById(id),
-    findUserTodos: (parent, { userId }, { models }) =>
+    findUserTodos: (parent, { user_id }, { models }) =>
       models.Todo.findAll({
         where: {
-          userId
+          user_id
         }
       }),
     me: (parent, args, { models, user }) => {
@@ -33,18 +33,27 @@ export default {
     }
   },
   Mutation: {
-    completeTodo: (parent, { id, completed, userId }, { models }) =>
-      models.Todo.update({ completed }, { where: { id, userId } }),
+    completeTodo: (parent, { id, completed, user_id }, { models }) =>
+      models.Todo.update({ completed }, { where: { id, user_id } }),
     createTodo: (parent, args, { models }) => models.Todo.create(args),
-    updateTodo: (parent, { id, newText, userId }, { models }) =>
-      models.Todo.update({ text: newText }, { where: { id, userId } }),
-    deleteTodo: (parent, { id, userId }, { models }) =>
-      models.Todo.destroy({ where: { id, userId } }),
+    updateTodo: (parent, { id, newText, user_id }, { models }) =>
+      models.Todo.update({ text: newText }, { where: { id, user_id } }),
+    deleteTodo: (parent, { id, user_id }, { models }) =>
+      models.Todo.destroy({ where: { id, user_id } }),
     updateUser: (parent, { id, newUsername }, { models }) =>
       models.User.update({ username: newUsername }, { where: { id } }),
     deleteUser: (parent, { id }, { models }) =>
       models.User.destroy({ where: { id } }),
-    register: (parent, args, { models }) => models.User.create(args),
+    register: async (parent, { email, password, username }, { models }) => {
+      // Must create User first.
+      const newUser = await models.User.create({ username })
+      // LocalAuth depends on association at 'user_id'.
+      return models.LocalAuth.create({
+        email,
+        password,
+        user_id: newUser.id
+      })
+    },
     login: (parent, { email, password }, { models, env }) =>
       loginValidation(email, password, models, env)
   }

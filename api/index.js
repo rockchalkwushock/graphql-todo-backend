@@ -3,6 +3,7 @@ import express from 'express'
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express'
 
 import { env, middlewares } from './config'
+import { authFacebook } from './services'
 import schema from './schema'
 import models from './models'
 
@@ -12,6 +13,13 @@ const app = express()
 
 // Apply middlewares
 middlewares(app)
+
+// Third-Party Authentication
+app.get('/auth/facebook', authFacebook)
+app.get('/auth/facebook/callback', authFacebook, (req, res) => {
+  // TODO: Cleanup
+  res.send('auth good')
+})
 
 app.use(
   '/graphiql',
@@ -25,7 +33,7 @@ app.use(
 )
 
 models.sequelize
-  .sync({ force: isProd })
+  .sync({ force: isProd, logging: false }) // isProd on logging later.
   .then(() => {
     app.listen(env.PORT, err => {
       if (err) return console.log(err)
