@@ -7,7 +7,13 @@ export default (sequelize, DataTypes) => {
     },
     text: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        len: {
+          args: [3, 140],
+          msg: 'A todo must be at least 3 characters in length.'
+        }
+      }
     },
     completed: {
       type: DataTypes.BOOLEAN,

@@ -36,7 +36,7 @@ export const authVkontakte = passport.authenticate('vkontakte', {
  */
 export const loginValidation = async (email, password, models, auth) => {
   try {
-    const user = await models.User.findOne({ where: { email } })
+    const user = await models.LocalAuth.findOne({ where: { email } })
     // TODO: Create Test Case.
     if (!user) throw new Error('Email not found.')
     const valid = compareSync(password, user.password)
@@ -47,7 +47,6 @@ export const loginValidation = async (email, password, models, auth) => {
     })
     return token
   } catch (e) {
-    console.log(e)
     throw e
   }
 }

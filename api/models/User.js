@@ -22,14 +22,14 @@ export default (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
-      // validate: {
-      //   // TODO: Create Test Cases.
-      //   len: {
-      //     args: [6, 16],
-      //     msg: 'Username must be between 6 and 16 characters in length.'
-      //   }
-      // }
+      unique: true,
+      validate: {
+        // TODO: Create Test Cases.
+        len: {
+          args: [6, 16],
+          msg: 'Username must be between 6 and 16 characters in length.'
+        }
+      }
     }
   })
   User.associate = models => {

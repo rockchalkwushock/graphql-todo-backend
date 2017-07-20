@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "commit": "nps commit",
-    "dev": "nps start.dev",
+    "dev": "nps api.dev",
     "precommit": "lint-staged",
     "prettier": "prettier --single-quote --no-semi",
     "start": "nps",

@@ -5,7 +5,8 @@ import { env } from '../config'
 let sequelize
 /* istanbul ignore else */
 if (process.env.NODE_ENV === 'test') {
-  sequelize = new Sequelize(env.PSQL_URI)
+  // turn logging off here and no more crazy business!
+  sequelize = new Sequelize(env.PSQL_URI, { logging: false })
 } else if (process.env.NODE_ENV === 'development') {
   sequelize = new Sequelize(env.PSQL_URI)
 } else if (process.env.NODE_ENV === 'production') {
@@ -28,6 +29,6 @@ Object.keys(db).forEach(modelName => {
 })
 
 db.sequelize = sequelize
-db.Sequelize = Sequelize
+// db.Sequelize = Sequelize
 
 export default db
