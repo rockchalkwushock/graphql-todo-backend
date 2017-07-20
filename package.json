@@ -1,10 +1,10 @@
 {
-  "name": "graphql-express-server-trial",
+  "name": "graphql-todo-backend",
   "version": "0.1.0",
   "license": "MIT",
   "author": "Cody Brunner <rockchalkwushock@icloud.com> (https://rcws-development.com)",
-  "description": "Testing out GraphQL/Express.",
-  "repository": "",
+  "description": "Playing around with GraphQL and other tech.",
+  "repository": "https://github.com/rockchalkwushock/graphql-todo-backend.git",
   "main": "index.js",
   "scripts": {
     "commit": "nps commit",
