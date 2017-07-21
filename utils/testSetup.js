@@ -65,23 +65,9 @@ export const testSetup = async () => {
   await generateTodos()
 }
 
-// NOTE don't use drop! Tables go bye-bye, you must reconnect then...this supposedly will work?
-// @see https://stackoverflow.com/questions/31414050/postgresql-empty-table
-// this is not doing what I think it is...
-const cleanUp = async () => {
-  await Promise.all([
-    models.FBAuth.truncate(),
-    models.LocalAuth.truncate(),
-    models.Todo.truncate(),
-    models.User.truncate(),
-    models.VKAuth.truncate()
-  ])
-}
-
 export const testTearDown = async () => {
   // Empty the tables before closing the connection
   // NOTE: 'users' will not truncate do to the following error message in pSequel
   // REVIEW: ERROR: cannot truncate table referenced in a foreign key constraint.
-  await cleanUp()
   await models.sequelize.close()
 }
