@@ -18,19 +18,19 @@ export default {
         where: {
           user_id
         }
-      }),
-    me: (parent, args, { models, user }) => {
-      if (user) {
-        return models.User.findOne({
-          where: {
-            id: user
-          }
-        })
-      }
-      // TODO: Handle error of user not being logged in.
-      // redirect & error message.
-      return null
-    }
+      })
+    // me: (parent, args, { models, user }) => {
+    //   if (user) {
+    //     return models.User.findOne({
+    //       where: {
+    //         id: user
+    //       }
+    //     })
+    //   }
+    //   // TODO: Handle error of user not being logged in.
+    //   // redirect & error message.
+    //   return null
+    // }
   },
   Mutation: {
     completeTodo: (parent, { id, completed, user_id }, { models }) =>

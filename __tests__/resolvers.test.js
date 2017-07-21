@@ -49,71 +49,61 @@ describe('Resolvers Test Suite', () => {
     }
   })
 
-  test.skip(
-    '#3: should return error on improper validation for email',
-    async () => {
-      try {
-        const { errors } = await graphql(
-          schema,
-          mocks.register('jim_nasium', '', '12345678'),
-          {},
-          { models }
-        )
-        expect.assertions(1)
-        console.log(errors[0])
-        expect(errors[0]).toHaveProperty(
-          'message',
-          'Validation error: You must provide a valid email.'
-        )
-      } catch (e) {
-        throw e
-      }
+  test('#3: should return error on improper validation for email', async () => {
+    try {
+      const { errors } = await graphql(
+        schema,
+        mocks.register('jim_nasium', '', '12345678'),
+        {},
+        { models }
+      )
+      expect.assertions(1)
+      expect(errors[0]).toHaveProperty(
+        'message',
+        'Validation error: You must provide a valid email.'
+      )
+    } catch (e) {
+      throw e
     }
-  )
+  })
 
-  test.skip(
-    '#4: should return error on improper validation for password that is too short',
-    async () => {
-      try {
-        const { errors } = await graphql(
-          schema,
-          mocks.register('jim_nasium', 'jim_teacher87@yahoo.com', 'abc'),
-          {},
-          { models }
-        )
-        expect.assertions(1)
-        expect(errors[0]).toHaveProperty(
-          'message',
-          'Validation error: Password must be between 8 and 21 characters in length.'
-        )
-      } catch (e) {
-        throw e
-      }
+  test('#4: should return error on improper validation for password that is too short', async () => {
+    try {
+      const { errors } = await graphql(
+        schema,
+        mocks.register('jim_nasium', 'jim_teacher87@yahoo.com', 'abc'),
+        {},
+        { models }
+      )
+      expect.assertions(1)
+      expect(errors[0]).toHaveProperty(
+        'message',
+        'Validation error: Password must be between 8 and 21 characters in length.'
+      )
+    } catch (e) {
+      throw e
     }
-  )
+  })
 
-  test.skip(
-    '#5: should return error on improper validation for password that is non-alphanumeric',
-    async () => {
-      try {
-        const { errors } = await graphql(
-          schema,
-          mocks.register('jim_nasium', 'jim_teacher87@yahoo.com', '*/@#^&!+='),
-          {},
-          { models }
-        )
-        expect.assertions(1)
-        expect(errors[0]).toHaveProperty(
-          'message',
-          'Validation error: Password must only include alphanumeric characters.'
-        )
-      } catch (e) {
-        throw e
-      }
+  test('#5: should return error on improper validation for password that is non-alphanumeric', async () => {
+    try {
+      const { errors } = await graphql(
+        schema,
+        mocks.register('jim_nasium', 'jim_teacher87@yahoo.com', '*/@#^&!+='),
+        {},
+        { models }
+      )
+      expect.assertions(1)
+      expect(errors[0]).toHaveProperty(
+        'message',
+        'Validation error: Password must only include alphanumeric characters.'
+      )
+    } catch (e) {
+      throw e
     }
-  )
+  })
 
-  test.skip('#6: should authenticate user', async () => {
+  test('#6: should authenticate user', async () => {
     try {
       const { data: { login } } = await graphql(
         schema,
@@ -121,8 +111,9 @@ describe('Resolvers Test Suite', () => {
         {},
         { models, env }
       )
-      console.log(login)
-      // QUESTION How to test that we return a string???
+      expect.assertions(1)
+      // REVIEW Better assertion test for this???
+      expect(typeof login).toBe('string')
     } catch (e) {
       throw e
     }

@@ -51,13 +51,13 @@ export const loginValidation = async (email, password, models, auth) => {
   }
 }
 
-export const addUser = async req => {
-  const token = req.headers.authorization
-  try {
-    const { user } = await verify(token, env.JWT_SECRET)
-    req.user = user
-  } catch (err) {
-    console.log(err)
-  }
-  req.next()
-}
+// export const addUser = async req => {
+//   const token = req.headers.authorization
+//   try {
+//     const { user } = await verify(token, env.JWT_SECRET)
+//     req.user = user
+//   } catch (err) {
+//     console.log(err)
+//   }
+//   req.next()
+// }
