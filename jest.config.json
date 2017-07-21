@@ -1,11 +1,16 @@
 {
   "bail": true,
   "testEnvironment": "node",
+  "coveragePathIgnorePatterns": [
+    "./api/config/*.js",
+    "./api/services/auth/FB_Strategy.js",
+    "./api/services/auth/VK_Strategy.js"
+  ],
   "collectCoverageFrom": [
     "api/models/*.js",
     "api/resolvers/*.js",
     "api/schema/*.js",
-    "api/services/**/*.js"
+    "api/services/auth/index.js"
   ],
   "coverageThreshold": {
     "global": {
