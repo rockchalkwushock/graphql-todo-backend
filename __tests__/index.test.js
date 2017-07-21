@@ -3,8 +3,7 @@ import { graphql } from 'graphql'
 import { env } from '../api/config'
 import models from '../api/models'
 import schema from '../api/schema'
-import { connect, testSetup, testTearDown } from '../testUtils'
-import { mocks } from '../mocks'
+import { connect, mocks, testSetup, testTearDown } from '../utils'
 
 /**
  * TODO

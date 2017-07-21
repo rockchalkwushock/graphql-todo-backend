@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-export const mocks = {
+export default {
   completeTodo: (id, complete, user_id) => `
     mutation {
       completeTodo(id:"${id}", completed:${complete}, user_id:"${user_id}")

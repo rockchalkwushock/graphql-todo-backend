@@ -1,9 +1,8 @@
-// import faker from 'faker'
 import { graphql } from 'graphql'
 
-import { mocks } from './mocks'
-import models from './api/models'
-import schema from './api/schema'
+import mocks from './mocks'
+import models from '../api/models'
+import schema from '../api/schema'
 
 /**
  * @desc
@@ -68,7 +67,8 @@ export const testSetup = async () => {
 
 // NOTE don't use drop! Tables go bye-bye, you must reconnect then...this supposedly will work?
 // @see https://stackoverflow.com/questions/31414050/postgresql-empty-table
-export const cleanUp = async () => {
+// this is not doing what I think it is...
+const cleanUp = async () => {
   await Promise.all([
     models.FBAuth.truncate(),
     models.LocalAuth.truncate(),

@@ -46,9 +46,6 @@ export default {
       models.User.destroy({ where: { id } }),
     register: async (parent, { email, password, username }, { models }) => {
       // Must create User first.
-      console.log(email)
-      console.log(password)
-      console.log(username)
       const newUser = await models.User.create({ username })
       // LocalAuth depends on association at 'user_id'.
       return models.LocalAuth.create({
