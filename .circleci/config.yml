@@ -1,0 +1,47 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:7.10
+        environment:
+          PGHOST: 127.0.0.1
+          PGUSER: repo-test
+          NODE_ENV: test
+      - image: circleci/postgres:9.6.2-alpine
+        environment:
+          POSTGRES_USER: repo
+          POSTGRES_DB: repo-test
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - repo-yarn-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - repo-yarn-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - ~/.yarn-cache
+          key: repo-yarn-{{ checksum "yarn.lock" }}
+      # Wait for Postgres connection to open.
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      # Run validation checks & generate coverage reports
+      - run: yarn start validate.withCoverage
+      # Send coverage report to Codecov
+      - run: yarn start reportCoverage
+      - store_artifacts:
+          path: ./coverage/clover.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results:
+          path: ./coverage/clover.xml
+
