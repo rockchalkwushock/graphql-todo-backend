@@ -8,15 +8,7 @@ jobs:
     working_directory: ~/repo
     docker:
       - image: circleci/node:7.10
-        environment:
-          PGHOST: 127.0.0.1
-          PGUSER: repo-test
-          NODE_ENV: test
       - image: circleci/postgres:9.6.2-alpine
-        environment:
-          POSTGRES_USER: repo
-          POSTGRES_DB: repo-test
-          POSTGRES_PASSWORD: ""
     steps:
       - checkout
       # Download and cache dependencies

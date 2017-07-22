@@ -2,13 +2,11 @@ import Sequelize from 'sequelize'
 
 import { env } from '../config'
 
-const database = process.env.CI === true ? 'travis_ci_test' : env.PSQL_URI
-
 let sequelize
 /* istanbul ignore else */
 if (process.env.NODE_ENV === 'test') {
   // turn logging off here and no more crazy business!
-  sequelize = new Sequelize(database, { logging: false })
+  sequelize = new Sequelize(env.PSQL_URI, { logging: false })
 } else if (process.env.NODE_ENV === 'development') {
   sequelize = new Sequelize(env.PSQL_URI)
 } else if (process.env.NODE_ENV === 'production') {
