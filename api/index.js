@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 import express from 'express'
+import { createServer } from 'http'
+import { execute, subscribe } from 'graphql'
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express'
+import { SubscriptionServer } from 'subscriptions-transport-ws'
 
 import { env, middlewares } from './config'
 import { authFacebook, authVkontakte } from './services'
@@ -11,6 +14,7 @@ import { todoLoader } from './loaders'
 // Use to set up force dropping tables in 'test'
 const isProd = process.env.NODE_ENV !== 'production'
 const app = express()
+const server = createServer(app)
 
 // Apply middlewares
 middlewares(app)
@@ -46,11 +50,26 @@ app.use(
   }))
 )
 
+const subscriptionServer = new SubscriptionServer(
+  {
+    execute,
+    subscribe,
+    schema
+  },
+  {
+    server,
+    path: '/subscriptions'
+  }
+)
+
 models.sequelize
-  .sync({ force: false, logging: false }) // isProd on logging later.
+  .sync({ force: isProd, logging: isProd })
   .then(() => {
-    app.listen(env.PORT, err => {
-      if (err) return console.log(err)
+    server.listen(env.PORT, err => {
+      if (err) {
+        return console.log(err)
+      }
+      subscriptionServer()
       console.log(
         `GraphQL Server running on port ${env.PORT} in ${process.env.NODE_ENV}`
       )
@@ -59,3 +78,17 @@ models.sequelize
   .catch(e => {
     console.log(e)
   })
+
+// models.sequelize
+//   .sync({ force: isProd, logging: isProd })
+//   .then(() => {
+//     app.listen(env.PORT, err => {
+//       if (err) return console.log(err)
+//       console.log(
+//         `GraphQL Server running on port ${env.PORT} in ${process.env.NODE_ENV}`
+//       )
+//     })
+//   })
+//   .catch(e => {
+//     console.log(e)
+//   })

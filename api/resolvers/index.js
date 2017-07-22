@@ -1,6 +1,12 @@
 import { loginValidation } from '../services'
+import { userAdded } from '../subscriptions'
 
 export default {
+  Subscriptions: {
+    userAdded: {
+      subscribe: userAdded.subscribe()
+    }
+  },
   User: {
     todos: ({ id }, args, { todoLoader }) => todoLoader.load(id)
   },
@@ -44,13 +50,14 @@ export default {
     register: async (parent, { email, password, username }, { models }) => {
       // Must create User first.
       const newUser = await models.User.create({ username })
+      // Publish the event to everyone.
+      userAdded.publish(newUser)
       // LocalAuth depends on association at 'user_id'.
       return models.LocalAuth.create({
         email,
         password,
         user_id: newUser.id
       })
-      // QUESTION Why can user_id not be returned in the query???
     },
     login: (parent, { email, password }, { models, env }) =>
       loginValidation(email, password, models, env)

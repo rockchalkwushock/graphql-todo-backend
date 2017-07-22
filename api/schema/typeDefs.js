@@ -1,4 +1,7 @@
 export default `
+  type Email {
+    email: String!
+  }
   type Todo {
     completed: Boolean
     createdAt: String!
@@ -30,5 +33,13 @@ export default `
     deleteUser(id: ID!): Int!
     register(username: String!, email: String!, password: String!): User!
     login(email: String!, password: String!): String!
+  }
+  type Subscriptions {
+    userAdded: User!
+  }
+  schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscriptions
   }
 `
