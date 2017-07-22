@@ -2,10 +2,7 @@ import { loginValidation } from '../services'
 
 export default {
   User: {
-    todos: ({ id }, args, { models }) =>
-      models.Todo.findAll({
-        where: { id }
-      })
+    todos: ({ id }, args, { todoLoader }) => todoLoader.load(id)
   },
   Todo: {
     user_id: ({ id }, args, { models }) => models.User.findById(id)

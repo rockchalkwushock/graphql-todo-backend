@@ -6,6 +6,7 @@ import { env, middlewares } from './config'
 import { authFacebook, authVkontakte } from './services'
 import schema from './schema'
 import models from './models'
+import { todoLoader } from './loaders'
 
 // Use to set up force dropping tables in 'test'
 const isProd = process.env.NODE_ENV !== 'production'
@@ -34,11 +35,19 @@ app.use(
 )
 app.use(
   '/graphql',
-  graphqlExpress(req => ({ schema, context: { models, env, user: req.user } }))
+  graphqlExpress(req => ({
+    schema,
+    context: {
+      models,
+      env,
+      user: req.user,
+      todoLoader
+    }
+  }))
 )
 
 models.sequelize
-  .sync({ force: isProd, logging: false }) // isProd on logging later.
+  .sync({ force: false, logging: false }) // isProd on logging later.
   .then(() => {
     app.listen(env.PORT, err => {
       if (err) return console.log(err)
