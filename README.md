@@ -1,5 +1,8 @@
 # GraphQL Todo App (Back end)
 
+[![CircleCI](https://img.shields.io/circleci/project/github/rockchalkwushock/graphql-todo-backend.svg?style=flat-square)](https://circleci.com/gh/rockchalkwushock/graphql-todo-backend)
+[![Codecov](https://img.shields.io/codecov/c/github/rockchalkwushock/graphql-todo-backend.svg?style=flat-square)](https://codecov.io/gh/rockchalkwushock/graphql-todo-backend)
+
 [![Commitizen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/rockchalkwushock/graphql-todo-backend/pulls)
 
