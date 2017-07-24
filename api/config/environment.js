@@ -3,21 +3,19 @@ require('dotenv-safe').load()
 const devConfig = {
   EXPIRE_TIME: '1y',
   JWT_SECRET: 'm3LL0wY3ll0w',
-  PSQL_URI: `postgres://${process.env.PSQL_USER}:${process.env
-    .PSQL_PASSWORD}@localhost:5432/graphql_todo_dev`
+  PSQL_URI: process.env.PSQL_URI_DEV
 }
 
 const testConfig = {
   EXPIRE_TIME: '1s',
   JWT_SECRET: 'm3LL0wY3ll0w',
-  PSQL_URI: `postgres://${process.env.PSQL_USER}:${process.env
-    .PSQL_PASSWORD}@localhost:5432/graphql_todo_test`
+  PSQL_URI: process.env.PSQL_URI_TEST
 }
 
 const prodConfig = {
   EXPIRE_TIME: process.env.EXPIRE_TIME,
   JWT_SECRET: process.env.JWT_SECRET,
-  PSQL_URI: process.env.PSQL_URI
+  PSQL_URI: process.env.PSQL_URI_PROD
 }
 
 const defaultConfig = {

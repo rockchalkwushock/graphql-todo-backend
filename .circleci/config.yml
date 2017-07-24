@@ -22,8 +22,6 @@ jobs:
           paths:
             - ~/.yarn-cache
           key: repo-yarn-{{ checksum "yarn.lock" }}
-      # Wait for Postgres connection to open.
-      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
       # Run validation checks & generate coverage reports
       - run: yarn start validate.withCoverage
       # Send coverage report to Codecov
