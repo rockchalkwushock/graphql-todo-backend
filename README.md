@@ -18,13 +18,13 @@ This is a playground of sorts for getting ready to build the `apollo-graphql` ba
 
 ## Goals of Project
 
-- [ ] Understand the flow of `graphql` on the back end. _Getting there still need some more practice_
-- [ ] Gain working knowledge of `sql`, `postgres`, & `sequelize` as well as find best practices. _Ditto here too_
+- [x] Understand the flow of `graphql` on the back end. _Getting there still need some more practice_
+- [x] Gain working knowledge of `sql`, `postgres`, & `sequelize` as well as find best practices. _Ditto here too_
 - [x] Implement multiple OAuth Strategies through the `graphql` endpoint & database.
-- [ ] Learn how to test `graphql` api. _slow but getting there_
+- [x] Learn how to test `graphql` api. _slow but getting there_
 - [ ] Learn & understand how to implement a mail client like `nodemailer` or `sendgrid` with `graphql` endpoint.
-- [ ] Implement `dataloader` and learn about it.
-- [ ] Implement subscriptions with `graphql`.
+- [x] Implement `dataloader` and learn about it.
+- [x] Implement subscriptions with `graphql`.
 
 ## Acknowledgements
 

@@ -22,6 +22,10 @@ export const connect = async () => {
   await models.sequelize.sync({ force: true })
 }
 
+/**
+ * @desc
+ * - generates 2 users in the database prior to each test.
+ */
 const generateUsers = async () => {
   await graphql(
     schema,
@@ -37,6 +41,10 @@ const generateUsers = async () => {
   )
 }
 
+/**
+ * @desc
+ * - generates 3 todos for the first user prior to each test.
+ */
 const generateTodos = async () => {
   const { data: { findAllUsers } } = await graphql(
     schema,
@@ -64,15 +72,20 @@ const generateTodos = async () => {
   )
 }
 
+/**
+ * @desc
+ * - Runs prior to each test generating dummy data to test against.
+ */
 export const testSetup = async () => {
   // cannot run in parallel dummy!
   await generateUsers()
   await generateTodos()
 }
 
+/**
+ * @desc
+ * - closes the connection to the database.
+ */
 export const testTearDown = async () => {
-  // Empty the tables before closing the connection
-  // NOTE: 'users' will not truncate do to the following error message in pSequel
-  // REVIEW: ERROR: cannot truncate table referenced in a foreign key constraint.
   await models.sequelize.close()
 }

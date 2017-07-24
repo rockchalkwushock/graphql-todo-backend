@@ -24,7 +24,6 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        // TODO: Create Test Cases.
         len: {
           args: [6, 16],
           msg: 'Username must be between 6 and 16 characters in length.'

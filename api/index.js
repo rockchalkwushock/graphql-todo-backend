@@ -22,12 +22,10 @@ middlewares(app)
 // Third-Party Authentication
 app.get('/auth/facebook', authFacebook)
 app.get('/auth/facebook/callback', authFacebook, (req, res) => {
-  // TODO: Cleanup
   res.send('auth good')
 })
 app.get('/auth/vkontakte', authVkontakte)
 app.get('/auth/vkontakte/callback', authVkontakte, (req, res) => {
-  // TODO: Cleanup
   res.send('auth good')
 })
 

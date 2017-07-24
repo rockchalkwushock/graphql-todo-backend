@@ -15,7 +15,6 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
         validate: {
-          // TODO: Create Test Case.
           isEmail: {
             args: true,
             msg: 'You must provide a valid email.'
@@ -27,7 +26,6 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
         validate: {
-          // TODO: Create Test Cases.
           isAlphanumeric: {
             args: true,
             msg: 'Password must only include alphanumeric characters.'

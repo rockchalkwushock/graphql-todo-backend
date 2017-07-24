@@ -8,6 +8,7 @@ export default {
     }
   },
   User: {
+    // Use dataloader to batch & cache the queries here.
     todos: ({ id }, args, { todoLoader }) => todoLoader.load(id)
   },
   Todo: {
@@ -53,6 +54,8 @@ export default {
       // Publish the event to everyone.
       userAdded.publish(newUser)
       // LocalAuth depends on association at 'user_id'.
+      // NOTE: LocalAuth is what is being returned. This `id` being returned
+      // is NOT the id associated with `users`.
       return models.LocalAuth.create({
         email,
         password,

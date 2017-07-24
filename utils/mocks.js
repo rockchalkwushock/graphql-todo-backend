@@ -1,5 +1,9 @@
 /* eslint-disable camelcase */
 
+/**
+ * @desc
+ * - GraphQL Queries for testing.
+ */
 export default {
   completeTodo: (id, complete, user_id) => `
     mutation {

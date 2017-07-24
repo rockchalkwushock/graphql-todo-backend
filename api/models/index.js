@@ -5,7 +5,7 @@ import { env } from '../config'
 let sequelize
 /* istanbul ignore else */
 if (process.env.NODE_ENV === 'test') {
-  // turn logging off here and no more crazy business!
+  // turn logging off here and no more crazy business while testing!
   sequelize = new Sequelize(env.PSQL_URI, { logging: false })
 } else if (process.env.NODE_ENV === 'development') {
   sequelize = new Sequelize(env.PSQL_URI)
